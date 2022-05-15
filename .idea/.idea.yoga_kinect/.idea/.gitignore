@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.yoga_kinect.iml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\Ronny\Documents\Projects\yoga_kinect\.idea\.idea.yoga_kinect\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
