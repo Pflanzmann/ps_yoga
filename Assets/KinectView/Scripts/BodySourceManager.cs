@@ -8,8 +8,7 @@ public class BodySourceManager : MonoBehaviour
     private BodyFrameReader _Reader;
     private Body[] _Data = null;
     
-    public Body[] GetData()
-    {
+    public Body[] GetData() {
         return _Data;
     }
     
@@ -21,7 +20,7 @@ public class BodySourceManager : MonoBehaviour
         if (_Sensor != null)
         {
             _Reader = _Sensor.BodyFrameSource.OpenReader();
-            
+
             if (!_Sensor.IsOpen)
             {
                 _Sensor.Open();
@@ -34,13 +33,14 @@ public class BodySourceManager : MonoBehaviour
         if (_Reader != null)
         {
             var frame = _Reader.AcquireLatestFrame();
+
             if (frame != null)
             {
                 if (_Data == null)
                 {
                     _Data = new Body[_Sensor.BodyFrameSource.BodyCount];
                 }
-                
+
                 frame.GetAndRefreshBodyData(_Data);
                 
                 frame.Dispose();
