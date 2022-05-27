@@ -131,7 +131,7 @@ public class BodySourceView : MonoBehaviour {
             if(targetJoint.HasValue) {
                 lr.SetPosition(0, jointObj.localPosition);
                 lr.SetPosition(1, GetVector3FromJoint(targetJoint.Value));
-                lr.SetColors(GetColorForState(sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
+             //   lr.SetColors(GetColorForState(sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
             } else {
                 lr.enabled = false;
             }
