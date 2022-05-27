@@ -24,4 +24,8 @@ public class KinectManager : MonoBehaviour {
             primaryBody = null;
         }
     }
+
+    public bool HasRegisteredBody() {
+        return primaryBody == null;
+    }
 }
