@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 432297618}
   - component: {fileID: 432297617}
   m_Layer: 0
-  m_Name: Test
+  m_Name: KinectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,33 +469,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.09064613
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.42983517
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.9150943
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.09064613
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.42983517
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360771155875572490, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.9150943
+    - target: {fileID: 6092328588047026550, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
+      propertyPath: errorOffset
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719460, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_RootOrder
