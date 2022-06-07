@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 1286228544}
   - component: {fileID: 1286228543}
   - component: {fileID: 1286228546}
+  - component: {fileID: 1286228547}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -590,7 +591,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1286228546}
         m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
-        m_MethodName: sendRequest
+        m_MethodName: SendRequest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -650,6 +651,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a568c51f549f14d9fa396fb2a0cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1286228547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286228541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da110ec275f784e29a67c1cc9e370719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tokens:
+    authorizeToken: 
+    refreshToken: 
+  jsonFile: {fileID: 4900000, guid: c34d051da90334a14ab0b3865fd1ae9e, type: 3}
 --- !u!1 &1359227924
 GameObject:
   m_ObjectHideFlags: 0
