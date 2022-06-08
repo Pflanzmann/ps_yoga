@@ -471,7 +471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6092328588047026550, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: errorOffset
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719460, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_RootOrder
@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719460, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719460, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_LocalPosition.y
