@@ -6,7 +6,7 @@ using UnityEngine;
 public class PoseComparer : MonoBehaviour
 {
     [SerializeField]
-    private double errorOffset;
+    private float errorOffset;
 
     private BodyParts poseBodyParts;
 
@@ -26,23 +26,22 @@ public class PoseComparer : MonoBehaviour
 
     private void comparePoses()
     {
-        var liveParts =
-            KinectManager.instance.primaryBody.GetComponent<BodyParts>();
-
-        foreach (var poseBodyPart in poseBodyParts.bodyPartTransforms)
+        var liveParts = KinectManager.instance.primaryBody.GetComponent<BodyParts>();
+        liveParts.CalculateJointDirectionVectors();
+        
+        foreach (var jointDirection in poseBodyParts.jointDirections)
         {
-            var partKey = poseBodyPart.Key;
+            var partKey = jointDirection.Key;
 
-            var poseTransform = poseBodyPart.Value;
-            var liveTransform = liveParts.bodyPartTransforms[partKey];
+            var poseJointDirection = jointDirection.Value;
+            var liveJointDirection = liveParts.jointDirections[partKey];
 
-            var distance =
-                Vector2
-                    .Distance(poseTransform.position, liveTransform.position);
+            var distanceVector = poseJointDirection - liveJointDirection;
+            var distanceLength = distanceVector.magnitude;
 
-            LineRenderer bodyPartLineRenderer =
-                liveTransform.GetComponent<LineRenderer>();
-            if (distance > errorOffset)
+            var liveTransform = liveParts.bodyPartTransforms[partKey.ToString()];
+            LineRenderer bodyPartLineRenderer = liveTransform.GetComponent<LineRenderer>();
+            if (distanceLength > errorOffset)
             {
                 bodyPartLineRenderer.SetColors(Color.red, Color.red);
             }
@@ -50,6 +49,12 @@ public class PoseComparer : MonoBehaviour
             {
                 bodyPartLineRenderer.SetColors(Color.green, Color.green);
             }
+            
         }
+    }
+
+    private void comparePosesNew()
+    {
+        
     }
 }
