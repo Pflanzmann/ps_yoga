@@ -591,7 +591,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1286228546}
         m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
-        m_MethodName: SendRequest
+        m_MethodName: SendYogaResult
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -651,6 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a568c51f549f14d9fa396fb2a0cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  message: test
+  to_contact: felix.kunath@web.de
 --- !u!114 &1286228547
 MonoBehaviour:
   m_ObjectHideFlags: 0
