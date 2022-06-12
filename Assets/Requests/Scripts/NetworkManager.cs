@@ -24,8 +24,10 @@ public class NetworkManager : MonoBehaviour
     private String authCode = null;
     private bool gotToken = false;
 
-    // private String authUrl = "https://zoom.us/oauth/authorize?response_type=code&client_id=Lge3pEcAT3aSoNxRolGnFw&redirect_uri=https://example.com";
-
+    public void Start()
+    {
+        
+    }
     public void SendRequest()
     {
         
@@ -36,12 +38,39 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(GetToken());
         StartCoroutine(SendMessage());
     }
+
+
     public void SendYogaResult()
     {
-        if (this.accessToken == null)
-            StartCoroutine(GetToken());
+        if (this.accessToken == null) {
+            if (this.refreshToken == null)
+                StartCoroutine(GetToken());
+            else
+                StartCoroutine(RefreshToken());
+        }
+        else
+            this.gotToken = true;
 
+        if (this.to_contact == null)
+            StartCoroutine(GetHost());
         StartCoroutine(SendMessage());
+    }
+
+    private string GetHost()
+    {
+        throw new NotImplementedException();
+    }
+
+    private IEnumerator RefreshToken()
+    {
+        String clientIdAndSecret = EncodeTo64(clientID + ":" + clientSecret);
+        var postRefreshToken = CreateRequest("https://zoom.us/oauth/token?refresh_token=" + this.refreshToken + "&grant_type=refresh_token", RequestType.POST);
+        AttachHeader(postRefreshToken, "Authorization", "Basic " + clientIdAndSecret);
+        yield return postRefreshToken.SendWebRequest();
+        var deserializedPostData = JsonUtility.FromJson<PostGetToken>(postRefreshToken.downloadHandler.text);
+        this.accessToken = deserializedPostData.access_token;
+        this.refreshToken = deserializedPostData.refresh_token;
+        print("Token Data:  " + postRefreshToken.downloadHandler.text);
     }
 
     private IEnumerator SendMessage()
@@ -56,7 +85,8 @@ public class NetworkManager : MonoBehaviour
         var postReqSendMessage = CreateRequest("https://api.zoom.us/v2/chat/users/me/messages", RequestType.POST, postSendMesData);
         AttachHeader(postReqSendMessage, "Authorization", "Bearer " + this.accessToken);
         yield return postReqSendMessage.SendWebRequest();
-        // wenn ergebnis nicht id: ....
+
+        // wenn ergebnis nicht "id: ...." dann fehlerbehandlung -> access token falsch => refresh token
         print("POST DATA1 " + postReqSendMessage.downloadHandler.text);
     }
 
@@ -76,7 +106,6 @@ public class NetworkManager : MonoBehaviour
         
         // Post get oAuth 2.0 access and refresh token
         String clientIdAndSecret = EncodeTo64(clientID + ":" + clientSecret);
-        print(clientIdAndSecret);
         var postToken = CreateRequest("https://zoom.us/oauth/token?code=" + this.authCode + "&grant_type=authorization_code&redirect_uri=" + this.redirectUri, RequestType.POST);
         AttachHeader(postToken, "Authorization", "Basic " + clientIdAndSecret);
         yield return postToken.SendWebRequest();
@@ -131,17 +160,6 @@ public enum RequestType
     GET = 0,
     POST = 1,
     PUT = 2
-}
-
-
-public class Todo
-{
-    // Ensure no getters / setters
-    // Typecase has to match exactly
-    public int userId;
-    public int id;
-    public string title;
-    public bool completed;
 }
 
 [Serializable]
