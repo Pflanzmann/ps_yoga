@@ -1,4 +1,6 @@
-﻿public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
+﻿using System.Collections.Generic;
+
+public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
 
 
     public override void OnEventRaised(PoseData value) {
@@ -12,9 +14,18 @@
         //dataSuccessfullyEvaluatedEvent.Raise(ausgewerteterStreing);
     }
 
-    private string evaluate(PoseData data) {
+    private void evaluate(PoseData data) {
         //magic
-        return "";
+        List<JointData> magic = new List<JointData>();
+        foreach (var jointData in data.JointDatas)
+        {
+            if(jointData.IsCorrect == false)
+            {
+                magic.Add(jointData);
+            }
+        }
+        print("All falsh jointtype: " + magic);
+        
     }
 
 }
