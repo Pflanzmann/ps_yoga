@@ -2393,6 +2393,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342874678}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &398360456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398360458}
+  - component: {fileID: 398360457}
+  m_Layer: 0
+  m_Name: PoseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &398360457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398360456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b926de9860e974d8890b3ebc4b7f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseList:
+  - {fileID: 599844883}
+  - {fileID: 289014419}
+  - {fileID: 1178018759}
+  - {fileID: 289014419}
+  poseDuration: 2
+--- !u!4 &398360458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398360456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44814324, y: -0.96636295, z: 9.348969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432297616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,6 +3106,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589308670}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &599844883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6360771156191719461, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
+  m_PrefabInstance: {fileID: 6360771155338735823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642162823
 GameObject:
   m_ObjectHideFlags: 0
@@ -11235,7 +11290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719461, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_Name
-      value: Pose1
+      value: Pendel
       objectReference: {fileID: 0}
     - target: {fileID: 6360771156191719461, guid: e8a0ca508e9254d4bafe6b4a308ab0d8, type: 3}
       propertyPath: m_IsActive
