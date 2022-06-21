@@ -651,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a568c51f549f14d9fa396fb2a0cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: test
-  to_contact: felix.kunath@web.de
+  message: 
+  to_contact: 
 --- !u!114 &1286228547
 MonoBehaviour:
   m_ObjectHideFlags: 0
