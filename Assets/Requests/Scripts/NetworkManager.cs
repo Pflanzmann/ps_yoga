@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkManager : MonoBehaviour
+public class NetworkManager : BaseGameEventListener<string>
 {
     // gernerated tokens or from file 
     private String accessToken = null;
@@ -20,6 +20,12 @@ public class NetworkManager : MonoBehaviour
     // for getting code to get token
     private bool gotToken = false;
     private bool isUrlOpen = false;
+
+    public override void OnEventRaised(string value) {
+        base.OnEventRaised(value);
+
+        print("Do ur stuff here");
+    }
 
     public void Start()
     {
