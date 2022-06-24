@@ -39,7 +39,7 @@ public class PoseManager : MonoBehaviour
         }   
         
         currentPoseIndex += 1;
-        poseList[currentPoseIndex].SetActive(true);
+        poseList[currentPoseIndex % poseList.Count].SetActive(true);
     }
     
 }

@@ -1510,6 +1510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 289014421}
   - component: {fileID: 289014420}
+  - component: {fileID: 289014422}
   m_Layer: 0
   m_Name: FearfulWarrior
   m_TagString: Untagged
@@ -1569,6 +1570,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &289014422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289014419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bd08b7ccc0ddc408f826a9c24cdecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseDataEvent: {fileID: 11400000, guid: 126b141cecd1c7e4c919800a525f421f, type: 2}
+  updateInterval: 2
+  errorOffset: 0.2
 --- !u!1 &298144159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,7 +2443,7 @@ MonoBehaviour:
   - {fileID: 289014419}
   - {fileID: 1178018759}
   - {fileID: 289014419}
-  poseDuration: 2
+  poseDuration: 15
 --- !u!4 &398360458
 Transform:
   m_ObjectHideFlags: 0
@@ -6527,6 +6543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1178018761}
   - component: {fileID: 1178018760}
+  - component: {fileID: 1178018762}
   m_Layer: 0
   m_Name: Flamingo
   m_TagString: Untagged
@@ -6586,6 +6603,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1178018762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178018759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bd08b7ccc0ddc408f826a9c24cdecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseDataEvent: {fileID: 11400000, guid: 126b141cecd1c7e4c919800a525f421f, type: 2}
+  updateInterval: 2
+  errorOffset: 0.2
 --- !u!1 &1278076866
 GameObject:
   m_ObjectHideFlags: 0
