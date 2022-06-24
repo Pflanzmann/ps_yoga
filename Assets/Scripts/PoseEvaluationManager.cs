@@ -37,41 +37,42 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
         print("All falsh jointtype: " );
         //return "abc";
     }*/
-    
+
 //}
 
 using System.Collections.Generic;
+using UnityEngine;
 public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
 
+    [SerializeField] private BaseGameEvent<string> evaluationEvent;
 
     public override void OnEventRaised(PoseData value) {
         base.OnEventRaised(value);
         foreach(var jointData in value.JointDatas) {
             print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
-              
-        
 
-        //var ausgewerteterStreing = evaluate(value);
 
-        //dataSuccessfullyEvaluatedEvent.Raise(ausgewerteterStreing);
-        //print(ausgewerteterStreing);
-        print(evaluate(value));
+            //var ausgewerteterStreing = evaluate(value);
+
+            //dataSuccessfullyEvaluatedEvent.Raise(ausgewerteterStreing);
+            //print(ausgewerteterStreing);
+            var result = evaluate(value);
+            print(result);
+
+            evaluationEvent?.Raise(result);
         }
-       }
+    }
 
     private string evaluate(PoseData value) {
         //magic
-        var magic=new List<JointData>();
-        foreach(var jointData in value.JointDatas)
-        {
-            if(jointData.IsCorrect == false)
-            {
+        var magic = new List<JointData>();
+        foreach(var jointData in value.JointDatas) {
+            if(jointData.IsCorrect == false) {
                 magic.Add(jointData);
             }
         }
         var allFalschPose = " All false Poses : ";
-        foreach (var falschepose in magic)
-        {
+        foreach(var falschepose in magic) {
             allFalschPose += falschepose.JointType + " ,";
         }
         allFalschPose += " .";
