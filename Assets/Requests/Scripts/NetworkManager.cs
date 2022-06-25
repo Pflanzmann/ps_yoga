@@ -15,31 +15,31 @@ public class NetworkManager : BaseGameEventListener<string>
     // ngrok server uri to forward to localhost
     private readonly String redirectUri = "https://5170-2003-ea-1717-fb27-f436-c95-412b-212e.eu.ngrok.io";
     // send message body data
-    public String message = "hallo";
-    public String to_contact = "timo.ji317@web.de";
+    private String message = "hallo";
+    private String to_contact = "timo.ji317@web.de";
     // for getting code to get token
     private bool gotToken = false;
     private bool isUrlOpen = false;
 
     public override void OnEventRaised(string value) {
         base.OnEventRaised(value);
-
-        print("Do ur stuff here");
+        this.message = value;
+        this.SendYogaResult(value);
+        
     }
 
     public void Start()
     {
-        this.to_contact = "timo.ji317@web.de";
-        this.message = "Hi wie gehts?";
+        this.message = "Test Nachricht";
     }
     public void SendRequest()
     {
         StartCoroutine(GetToken());
-        StartCoroutine(SendMessage());
+        StartCoroutine(SendMessage(this.message));
     }
 
 
-    public void SendYogaResult()
+    public void SendYogaResult(String message)
     {
         if (this.accessToken == null)
         {
@@ -49,11 +49,11 @@ public class NetworkManager : BaseGameEventListener<string>
         {
             this.gotToken = true;
         }
-        StartCoroutine(SendMessage());
+        StartCoroutine(SendMessage(message));
 
     }
 
-    private IEnumerator SendMessage()
+    private new IEnumerator SendMessage(String message)
     {
         // timeout after certain amount of tries
         while (!this.gotToken)
@@ -63,8 +63,7 @@ public class NetworkManager : BaseGameEventListener<string>
         // POST send message
         // after Bearer enter your OAuthToken
         // to_contact email has to be in your contacts
-        var postSendMesData = new SendMessageData() { message = this.message, to_contact = this.to_contact };
-        print(this.to_contact);
+        var postSendMesData = new SendMessageData() { message = message, to_contact = this.to_contact };
         var postReqSendMessage = CreateRequest("https://api.zoom.us/v2/chat/users/me/messages", RequestType.POST, postSendMesData);
         print(this.accessToken);
         AttachHeader(postReqSendMessage, "Authorization", "Bearer " + this.accessToken);
@@ -78,7 +77,7 @@ public class NetworkManager : BaseGameEventListener<string>
             // retry with and get new token
             this.gotToken = false;
             this.accessToken = null;
-            SendYogaResult();
+            SendYogaResult(message);
             print("error" + postReqSendMessage.downloadHandler.error);
         }
         // wenn ergebnis nicht "id: ...." dann fehlerbehandlung -> access token falsch => refresh token
