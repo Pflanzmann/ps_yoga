@@ -24,14 +24,16 @@ public class PoseComparer : MonoBehaviour {
 
         //check if there is a live body on screen
         if(KinectManager.instance.HasRegisteredBody()) {
-            comparePoses();
-            poseDataEvent.Raise(new PoseData(new List<JointData>()));
+            var jointDatas = comparePoses();
+            poseDataEvent.Raise(new PoseData(jointDatas));
         }
     }
 
-    private void comparePoses() {
+    private List<JointData> comparePoses() {
         var liveParts = KinectManager.instance.primaryBody.GetComponent<BodyParts>();
         liveParts.CalculateJointDirectionVectors();
+
+        var jointDatas = new List<JointData>();
 
         foreach(var jointDirection in poseBodyParts.jointDirections) {
             var partKey = jointDirection.Key;
@@ -49,6 +51,10 @@ public class PoseComparer : MonoBehaviour {
             } else {
                 bodyPartLineRenderer.SetColors(Color.green, Color.green);
             }
+
+            jointDatas.Add(new JointData(partKey, distanceLength, distanceLength < errorOffset));
         }
+
+        return jointDatas;
     }
 }

@@ -24,7 +24,9 @@ public class NetworkManager : BaseGameEventListener<string>
     public override void OnEventRaised(string value) {
         base.OnEventRaised(value);
         this.message = value;
-        this.SendYogaResult(value);
+        // this.SendYogaResult(value);
+
+        print("sending");
     }
 
     public void Start()

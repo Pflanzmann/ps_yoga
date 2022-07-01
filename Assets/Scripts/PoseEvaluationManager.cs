@@ -51,7 +51,7 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
         //  print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
 
         var result = evaluate(value);
-        // print(result);
+        print(result);
 
         evaluationEvent?.Raise(result);
     }
