@@ -1485,7 +1485,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
-  evaluationEvent: {fileID: 0}
+  evaluationEvent: {fileID: 11400000, guid: 4c1711e4949e39340bfeacd1075c55ae, type: 2}
 --- !u!4 &275269712
 Transform:
   m_ObjectHideFlags: 0
@@ -10703,8 +10703,6 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
-  message: hallo
-  to_contact: timo.ji317@web.de
 --- !u!4 &1866746426
 Transform:
   m_ObjectHideFlags: 0

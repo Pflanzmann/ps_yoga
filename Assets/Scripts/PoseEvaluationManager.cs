@@ -48,19 +48,12 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
 
     public override void OnEventRaised(PoseData value) {
         base.OnEventRaised(value);
-        foreach(var jointData in value.JointDatas) {
-            print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
+        //  print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
 
+        var result = evaluate(value);
+        // print(result);
 
-            //var ausgewerteterStreing = evaluate(value);
-
-            //dataSuccessfullyEvaluatedEvent.Raise(ausgewerteterStreing);
-            //print(ausgewerteterStreing);
-            var result = evaluate(value);
-            print(result);
-
-            evaluationEvent?.Raise(result);
-        }
+        evaluationEvent?.Raise(result);
     }
 
     private string evaluate(PoseData value) {

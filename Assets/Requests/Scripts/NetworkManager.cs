@@ -25,7 +25,6 @@ public class NetworkManager : BaseGameEventListener<string>
         base.OnEventRaised(value);
         this.message = value;
         this.SendYogaResult(value);
-        
     }
 
     public void Start()
