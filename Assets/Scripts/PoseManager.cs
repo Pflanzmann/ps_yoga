@@ -1,45 +1,56 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+public class PoseManager : MonoBehaviour {
+    [Serializable]
+    public class PoseObject {
+        public GameObject gameObject;
+        public Sprite poseSprite;
+        public string poseName;
+    }
 
-public class PoseManager : MonoBehaviour
-{
-    [SerializeField] private List<GameObject> poseList;
+    [SerializeField] private List<PoseObject> poseList;
     [SerializeField] private float poseDuration;
-    
+    [SerializeField] private TextMeshProUGUI poseText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private Image poseImage;
+
     private float timer;
     private int currentPoseIndex = 0;
 
-    private void Start()
-    {
-        foreach (var pose in poseList)
-        {
-            pose.SetActive(false);
-        }   
-        
-        poseList[0].SetActive(true);
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer < poseDuration)
-        {
-            return;
+    private void Start() {
+        foreach(var pose in poseList) {
+            pose.gameObject.SetActive(false);
         }
-        timer = 0;
-        
+
+        currentPoseIndex = -1;
         StartNextPose();
     }
 
-    private void StartNextPose()
-    {
-        foreach (var pose in poseList)
-        {
-            pose.SetActive(false);
-        }   
-        
-        currentPoseIndex += 1;
-        poseList[currentPoseIndex % poseList.Count].SetActive(true);
+    private void Update() {
+        timer += Time.deltaTime;
+        timerText.text = (poseDuration - timer).ToString().Substring(0, 4);
+
+        if(timer < poseDuration) {
+            return;
+        }
+        timer = 0;
+
+        StartNextPose();
     }
-    
+
+    private void StartNextPose() {
+        foreach(var pose in poseList) {
+            pose.gameObject.SetActive(false);
+        }
+
+        currentPoseIndex += 1;
+        poseList[currentPoseIndex % poseList.Count].gameObject.SetActive(true);
+
+        poseText.text = poseList[currentPoseIndex % poseList.Count].poseName + " halten für:";
+        poseImage.sprite = poseList[currentPoseIndex % poseList.Count].poseSprite;
+    }
+
 }
