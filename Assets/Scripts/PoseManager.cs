@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-<<<<<<< refs/remotes/origin/evaluation
-public class PoseManager : MonoBehaviour {
-=======
 public class PoseManager : MonoBehaviour
 {
     public static PoseManager instance;
 
->>>>>>> local
     [Serializable]
     public class PoseObject
     {
@@ -28,10 +24,6 @@ public class PoseManager : MonoBehaviour
     private float timer;
     private int currentPoseIndex = 0;
 
-<<<<<<< refs/remotes/origin/evaluation
-    private void Start() {
-        foreach(var pose in poseList) {
-=======
     private void Awake()
     {
         if (instance == null)
@@ -48,7 +40,6 @@ public class PoseManager : MonoBehaviour
     {
         foreach (var pose in poseList)
         {
->>>>>>> local
             pose.gameObject.SetActive(false);
         }
 
@@ -84,11 +75,8 @@ public class PoseManager : MonoBehaviour
         poseImage.sprite = poseList[currentPoseIndex % poseList.Count].poseSprite;
     }
 
-<<<<<<< refs/remotes/origin/evaluation
-=======
     public String GetCurrentPoseName()
     {
         return poseText.text = poseList[currentPoseIndex % poseList.Count].poseName;
     }
->>>>>>> local
 }
