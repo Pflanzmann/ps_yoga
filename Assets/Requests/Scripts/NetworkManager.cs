@@ -13,7 +13,7 @@ public class NetworkManager : BaseGameEventListener<string>
     private readonly String clientID = "dvdxc0Z2SsWaOebq32qlvA";
     private String stateOfAccount;
     // ngrok server uri to forward to localhost
-    private readonly String redirectUri = "https://5170-2003-ea-1717-fb27-f436-c95-412b-212e.eu.ngrok.io";
+    private readonly String redirectUri = "https://ec53-2003-ea-1742-65c4-b882-6530-11c1-a517.eu.ngrok.io";
     // send message body data
     private String message = "hallo";
     private String to_contact = "timo.ji317@web.de";
@@ -24,7 +24,7 @@ public class NetworkManager : BaseGameEventListener<string>
     public override void OnEventRaised(string value) {
         base.OnEventRaised(value);
         this.message = value;
-        // this.SendYogaResult(value);
+        this.SendYogaResult(value);
 
         print("sending");
     }
@@ -89,6 +89,7 @@ public class NetworkManager : BaseGameEventListener<string>
     {
         while (this.accessToken == null || this.accessToken.Equals("NO_TOKEN"))
         {
+            print("getting token");
             yield return new WaitForSeconds(2f);
             var getCode = CreateRequest(redirectUri + "/token", RequestType.GET);
             yield return getCode.SendWebRequest();
