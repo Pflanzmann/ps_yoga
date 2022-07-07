@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 public class NetworkManager : BaseGameEventListener<string>
 {
+    TMP_InputField inputField;
+    // username for evaluation data
+    private String username = "";
     // gernerated tokens or from file 
     private String accessToken = null;
     // client credentials
@@ -21,16 +25,22 @@ public class NetworkManager : BaseGameEventListener<string>
     private bool gotToken = false;
     private bool isUrlOpen = false;
 
+    public void InputName()
+    {
+        username = inputField.text;
+    }
     public override void OnEventRaised(string value) {
         base.OnEventRaised(value);
-        this.message = value;
-        this.SendYogaResult(value);
+        this.message = this.username + "\n" + value;
+        print(this.message);
+        // this.SendYogaResult(value);
 
         print("sending");
     }
 
     public void Start()
     {
+        inputField = GameObject.Find("InputField (TMP)").GetComponent<TMP_InputField>();
         this.message = "Test Nachricht";
     }
     public void SendRequest()
