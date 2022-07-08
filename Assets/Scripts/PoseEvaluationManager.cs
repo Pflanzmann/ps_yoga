@@ -10,7 +10,7 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
     public override void OnEventRaised(PoseData value) {
         base.OnEventRaised(value);
         foreach(var jointData in value.JointDatas) {
-            print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
+           // print("JoinType: " + jointData.JointType + " | ErrorValue: " + jointData.ErrorValue + " | IsCorrect: " + jointData.IsCorrect);
 
 
             //var ausgewerteterStreing = evaluate(value);
@@ -41,48 +41,109 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
         var handShoulder = new List<JointType>() { JointType.HandTipLeft, JointType.HandLeft, JointType.ThumbLeft, JointType.WristLeft, JointType.ElbowLeft, JointType.ShoulderLeft, JointType.HandTipRight, JointType.HandRight, JointType.ThumbRight, JointType.WristRight, JointType.ElbowRight, JointType.ShoulderRight, JointType.ShoulderRight };
         var bodyHead = new List<JointType>() { JointType.SpineBase , JointType.SpineMid , JointType.SpineShoulder , JointType.Neck , JointType.Head };
         var beine = new List<JointType>() { JointType.FootLeft, JointType.AnkleLeft, JointType.KneeLeft , JointType.HipLeft, JointType.FootRight , JointType.AnkleRight , JointType.KneeRight , JointType.HipRight };
-        var countHand = 0;
-        var countBody = 0;
-        var countFoot = 0;
-        var namePose ="Name von Pose: " + PoseManager.instance.GetCurrentPoseName() + "\n";
+       
+        var namePose ="[" + PoseManager.instance.GetCurrentPoseName() + "]:\n";
         foreach (var jointData in value.JointDatas) {
             if(jointData.IsCorrect == false && jointData.ErrorValue > 0.25f) { 
                 magic.Add(jointData);
-            if (handShoulder.Contains(jointData.JointType))
-            {
-                countHand++;
-            } else if (bodyHead.Contains(jointData.JointType))
-                {
-                countBody++;
-                } else if (beine.Contains(jointData.JointType))
-                {
-                countFoot++;
-                }
-
+           
             }
         }
-        
-        var time = string.Format("{0:HH:mm:ss}", System.DateTime.Now);
-        var time2 = "Uhrzeit : " + time + ". \n";
-        var stringHand = string.Concat("💪(☞ﾟヮﾟ)☞🦾🦶🖐Hand:", (handShoulder.Count - countHand).ToString(), "/", handShoulder.Count.ToString(), "\n");
-        var stringBody = string.Concat("💪(☞ﾟヮﾟ)☞🦾🦶🖐👩‍👩‍👦👩‍👩‍👧🐮🐵☹🙁😓Body:", (bodyHead.Count - countBody).ToString(), "/", bodyHead.Count.ToString(), "\n");
-        var stringFoot = string.Concat("💪(☞ﾟヮﾟ)☞🦾🦶🖐Foot:", (beine.Count - countFoot).ToString(), "/", beine.Count.ToString(), "\n");
-
+        var allFalschPose = " ";
+       
         //var stringHand = "💪: " + (handShoulder.Count-countHand).ToString + "/" + handShoulder.Count.ToString;
 
-        var allFalschPose = " Alle besondere falsche Körperteile : ";
         
         foreach(var falschepose in magic) {
-            allFalschPose += falschepose.JointType + " ,";
+            switch (falschepose.JointType)
+            {
+                case JointType.HandTipLeft:
+                    allFalschPose += "☹Handspitze(links)\n";
+                    break;
+                case JointType.HandLeft:
+                    allFalschPose += "☹Hand(links)\n";
+                    break;
+                case JointType.ThumbLeft:
+                    allFalschPose += "☹Daumen(links)\n";
+                    break;
+                case JointType.WristLeft:
+                    allFalschPose += "☹Handgelenk(links)\n";
+                    break;
+                case JointType.ElbowLeft:
+                    allFalschPose += "☹Ellbogen(links)\n";
+                    break;
+                case JointType.ShoulderLeft:
+                    allFalschPose += "☹Schulter(links)\n";
+                    break;
+                case JointType.HandTipRight:
+                    allFalschPose += "☹Handspitze(rechts)\n";
+                    break;
+                case JointType.HandRight:
+                    allFalschPose += "☹Hand(rechts)\n";
+                    break;
+                case JointType.ThumbRight:
+                    allFalschPose += "☹Daumen(rechts)\n";
+                    break;
+                case JointType.WristRight:
+                    allFalschPose += "☹Handgelenk(rechts)\n";
+                    break;
+                case JointType.ElbowRight:
+                    allFalschPose += "☹Ellbogen(rechts)\n";
+                    break;
+                case JointType.ShoulderRight:
+                    allFalschPose += "☹Schulter(rechts)\n";
+                    break;
+                case JointType.SpineBase:
+                    allFalschPose += "☹Kreuzbein\n";
+                    break;
+                case JointType.SpineMid:
+                    allFalschPose += "☹Lendenwirbelsäule\n";
+                    break;
+                case JointType.SpineShoulder:
+                    allFalschPose += "☹Brustwirbelsäule\n";
+                    break;
+                case JointType.Neck:
+                    allFalschPose += "☹Nacken\n";
+                    break;
+                case JointType.Head:
+                    allFalschPose += "☹Kopf\n";
+                    break;
+                case JointType.FootLeft:
+                    allFalschPose += "☹Fuss(links)\n";
+                    break;
+                case JointType.AnkleLeft:
+                    allFalschPose += "☹Knöchel(links)\n";
+                    break;
+                case JointType.KneeLeft:
+                    allFalschPose += "☹Knie(links)\n";
+                    break;
+                case JointType.HipLeft:
+                    allFalschPose += "☹Hüfte(links)\n";
+                    break;
+                case JointType.FootRight:
+                    allFalschPose += "☹Fuss(rechts)\n";
+                    break;
+                case JointType.AnkleRight:
+                    allFalschPose += "☹Knöchel(rechts)\n";
+                    break;
+                case JointType.KneeRight:
+                    allFalschPose += "☹Knie(rechts)\n";
+                    break;
+                case JointType.HipRight:
+                    allFalschPose += "☹Hüfte(rechts)\n";
+                    break;
+
+            }
+           // allFalschPose += falschepose.JointType + " ,";
         }
-        allFalschPose += " .";
+        
         //return allFalschPose;
 
 
         allFalschPose += "\n";
         
 
-        return  namePose +time2 + stringHand +stringBody+stringFoot+ allFalschPose;
+        return  namePose + allFalschPose;
     }
 
 }
