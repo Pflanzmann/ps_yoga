@@ -49,7 +49,7 @@ public class MockPoseDataEventGenerator : MonoBehaviour {
         var jointDatas = new List<JointData>();
 
         foreach(var jointPair in _BoneMap) {
-            var errorValue = Random.Range(0f, 0.3f);
+            var errorValue = Random.Range(0f, 0.6f);
             jointDatas.Add(new JointData(jointPair.Key, errorValue, errorValue < 0.2f));
         }
 
