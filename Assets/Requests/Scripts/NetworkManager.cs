@@ -10,10 +10,10 @@ public class NetworkManager : MonoBehaviour
     // gernerated tokens or from file 
     private String accessToken = null;
     // client credentials
-    private readonly String clientID = "dvdxc0Z2SsWaOebq32qlvA";
+    private readonly String clientID = "ikA0hZoXR4eLu_Dw7WgWdw";
     private String stateOfAccount;
     // ngrok server uri to forward to localhost
-    private readonly String redirectUri = "https://5170-2003-ea-1717-fb27-f436-c95-412b-212e.eu.ngrok.io";
+    private readonly String redirectUri = "https://springboot-app-yoga-heorku.herokuapp.com";
     // send message body data
     public String message = "hallo";
     public String to_contact = "timo.ji317@web.de";
