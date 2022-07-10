@@ -17,11 +17,15 @@ public class PoseManager : MonoBehaviour
 
     [SerializeField] private List<PoseObject> poseList;
     [SerializeField] private float poseDuration;
+    [SerializeField] private float poseSendDataTiming;
     [SerializeField] private TextMeshProUGUI poseText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Image poseImage;
 
+    [SerializeField] private BaseGameEvent sendDataEvent;
+
     private float timer;
+    private bool didSendData;
     private int currentPoseIndex = 0;
 
     private void Awake()
@@ -52,11 +56,18 @@ public class PoseManager : MonoBehaviour
         timer += Time.deltaTime;
         timerText.text = (poseDuration - timer).ToString().Substring(0, 4);
 
+        if(!didSendData && timer > poseSendDataTiming) {
+            didSendData = true;
+            sendDataEvent.Raise();
+        }
+
         if (timer < poseDuration)
         {
             return;
         }
         timer = 0;
+
+        didSendData = false;
 
         StartNextPose();
     }
