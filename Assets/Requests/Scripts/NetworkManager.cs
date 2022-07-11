@@ -14,13 +14,13 @@ public class NetworkManager : BaseGameEventListener<string>
     // gernerated tokens or from file 
     private String accessToken = null;
     // client credentials
-    private readonly String clientID = "dvdxc0Z2SsWaOebq32qlvA";
+    private readonly String clientID = "SGzrqOyvRceYFZIoiqB7uQ";
     private String stateOfAccount;
     // ngrok server uri to forward to localhost
-    private readonly String redirectUri = "https://ec53-2003-ea-1742-65c4-b882-6530-11c1-a517.eu.ngrok.io";
+    private readonly String redirectUri = "https://springboot-app-yoga-heorku.herokuapp.com";
     // send message body data
     private String message = "hallo";
-    private String to_contact = "timo.ji317@web.de";
+    private String to_contact = "psyoga-trainer@zoom.htw-berlin.de";
     // for getting code to get token
     private bool gotToken = false;
     private bool isUrlOpen = false;
@@ -31,9 +31,9 @@ public class NetworkManager : BaseGameEventListener<string>
     }
     public override void OnEventRaised(string value) {
         base.OnEventRaised(value);
-        this.message = this.username + "\n" + value;
-        print(this.message);
-        // this.SendYogaResult(value);
+        this.message = this.username + ": \n" + value;
+        print("Evaluation message: " + this.message);
+        this.SendYogaResult(this.message);
 
         print("sending");
     }
