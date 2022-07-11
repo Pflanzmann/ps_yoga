@@ -25,6 +25,9 @@ public class NetworkManager : BaseGameEventListener<string>
     private bool gotToken = false;
     private bool isUrlOpen = false;
 
+    private Coroutine tokenRequestRoutine;
+    private Coroutine sendRequestRoutine;
+
     public void InputName()
     {
         username = inputField.text;
@@ -42,11 +45,24 @@ public class NetworkManager : BaseGameEventListener<string>
     {
         inputField = GameObject.Find("InputField (TMP)").GetComponent<TMP_InputField>();
         this.message = "Test Nachricht";
+
+        if(tokenRequestRoutine != null)
+        {
+            StopCoroutine(tokenRequestRoutine);
+        }
+
+
+        tokenRequestRoutine = StartCoroutine(GetToken());
+
     }
     public void SendRequest()
     {
-        StartCoroutine(GetToken());
-        StartCoroutine(SendMessage(this.message));
+        if(sendRequestRoutine != null)
+        {
+            StopCoroutine(sendRequestRoutine);
+        }
+
+        sendRequestRoutine = StartCoroutine(SendMessage(this.message));
     }
 
 
@@ -125,6 +141,7 @@ public class NetworkManager : BaseGameEventListener<string>
 
     private UnityWebRequest CreateRequest(string path, RequestType type, object data = null)
     {
+        try { 
         var request = new UnityWebRequest(path, type.ToString());
 
         if (data != null)
@@ -142,6 +159,11 @@ public class NetworkManager : BaseGameEventListener<string>
         }
         request.SetRequestHeader("Content-Type", "application/json");
         return request;
+            } catch (Exception e)
+        {
+           print(e);
+            return new UnityWebRequest();
+        }
     }
 
     private void AttachHeader(UnityWebRequest request, string key, string value)

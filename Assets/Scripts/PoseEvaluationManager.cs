@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows.Kinect;
 using UnityEngine;
+using System;
 public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
 
     [SerializeField] private BaseGameEvent<string> evaluationEvent;
@@ -18,12 +19,18 @@ public class PoseEvaluationManager : BaseGameEventListener<PoseData> {
             //dataSuccessfullyEvaluatedEvent.Raise(ausgewerteterStreing);
             //print(ausgewerteterStreing);
         }
+        Exception e;
         resultMessage = evaluate(value);
         print(resultMessage);
     }
 
     public void OnSendPoseData() {
+      try {
         evaluationEvent?.Raise(resultMessage);
+            } catch (Exception e)
+        {
+            print(e);
+        }
     }
 
     private string evaluate(PoseData value) {
