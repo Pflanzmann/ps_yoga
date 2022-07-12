@@ -94,21 +94,24 @@ public class NetworkManager : BaseGameEventListener<string>
         var postReqSendMessage = CreateRequest("https://api.zoom.us/v2/chat/users/me/messages", RequestType.POST, postSendMesData);
         print(this.accessToken);
         AttachHeader(postReqSendMessage, "Authorization", "Bearer " + this.accessToken);
-        yield return postReqSendMessage.SendWebRequest();
-        if (postReqSendMessage.responseCode == 201)
+        using (postReqSendMessage)
         {
-            print("no error");
+            yield return postReqSendMessage.SendWebRequest();
+            if (postReqSendMessage.responseCode == 201)
+            {
+                print("no error");
+            }
+            else
+            {
+                // retry with and get new token
+                this.gotToken = false;
+                this.accessToken = null;
+                SendYogaResult(message);
+                print("error" + postReqSendMessage.downloadHandler.error);
+            }
+            // wenn ergebnis nicht "id: ...." dann fehlerbehandlung -> access token falsch => refresh token
+            print("POST DATA1 " + postReqSendMessage.downloadHandler.text);
         }
-        else
-        {
-            // retry with and get new token
-            this.gotToken = false;
-            this.accessToken = null;
-            SendYogaResult(message);
-            print("error" + postReqSendMessage.downloadHandler.error);
-        }
-        // wenn ergebnis nicht "id: ...." dann fehlerbehandlung -> access token falsch => refresh token
-        print("POST DATA1 " + postReqSendMessage.downloadHandler.text);
     }
 
     private IEnumerator GetToken()
@@ -118,20 +121,24 @@ public class NetworkManager : BaseGameEventListener<string>
             print("getting token");
             yield return new WaitForSeconds(2f);
             var getCode = CreateRequest(redirectUri + "/token", RequestType.GET);
-            yield return getCode.SendWebRequest();
-            // when server not accesible
-            // and ngrok gives an error in html format
-            // dont set authCode to html output
-            if (getCode.downloadHandler.text.Equals("NO_TOKEN") && !isUrlOpen){
+            using (getCode)
+            {
+                yield return getCode.SendWebRequest();
+                // when server not accesible
+                // and ngrok gives an error in html format
+                // dont set authCode to html output
+                if (getCode.downloadHandler.text.Equals("NO_TOKEN") && !isUrlOpen)
+                {
 
-                this.stateOfAccount = System.Guid.NewGuid().ToString();
-                Application.OpenURL("https://zoom.us/oauth/authorize?response_type=code&client_id=" + this.clientID + "&redirect_uri=" + this.redirectUri + "&state=" + this.stateOfAccount);
-                this.isUrlOpen = true;
+                    this.stateOfAccount = System.Guid.NewGuid().ToString();
+                    Application.OpenURL("https://zoom.us/oauth/authorize?response_type=code&client_id=" + this.clientID + "&redirect_uri=" + this.redirectUri + "&state=" + this.stateOfAccount);
+                    this.isUrlOpen = true;
+                }
+                // error between ngrok and server for tokens
+                // response is html
+                if (!getCode.downloadHandler.text.Contains("<"))
+                    this.accessToken = getCode.downloadHandler.text;
             }
-            // error between ngrok and server for tokens
-            // response is html
-            if (!getCode.downloadHandler.text.Contains("<"))
-                this.accessToken = getCode.downloadHandler.text;
         } 
         this.isUrlOpen = false;
         print(this.accessToken);
