@@ -54,7 +54,10 @@ public class PoseManager : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        timerText.text = (poseDuration - timer).ToString().Substring(0, 4);
+        var timeText = (poseDuration - timer).ToString();
+
+        var substringLenght = Mathf.Min(timeText.Length, 4);
+        timerText.text = timeText.Substring(0, substringLenght);
 
         if(!didSendData && timer > poseSendDataTiming) {
             didSendData = true;
